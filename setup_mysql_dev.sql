@@ -3,9 +3,9 @@
 -- Grant all privileges on db to user
 -- Grant SELECT privileges on schema to user
 
-CREATE DATABASE IF NOT EXISTS hbtn_test_db;
+CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 
-CREATE USER IF NOT EXISTS 'hbnd_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
+CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
 
