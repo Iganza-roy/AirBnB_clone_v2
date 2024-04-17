@@ -33,7 +33,7 @@ class DBStorage:
     def all(self, cls=None):
         """ Queries db depending on classname """
         objects = {}
-        classes = [City, State, User, Place]
+        classes = [City, State, User, Place, Review]
 
         if cls:
             classes = [cls]
