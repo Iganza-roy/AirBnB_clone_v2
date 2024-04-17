@@ -42,14 +42,16 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
-        cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        #cls = (str(type(self)).split('.')[-1]).split('\'')[0]
+        instance_dict = self.__dict__.copy()
+        instance_dict.pop('_sa_instance_state', None)
+        return '[{:s}] ({:s}) {}'.format(self.__class__.__name__, self.id, instance_dict)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
-        storage.new(self)
+        models.storage.new(self)
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
