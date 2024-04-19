@@ -7,6 +7,16 @@ import sqlalchemy
 from sqlalchemy import Column, String, Integer, Float, Table, ForeignKey
 from sqlalchemy.orm import relationship
 
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    place_amenity = Table('place_amenity', Base.metadata,
+                        Column('place_id', String(60),
+                            ForeignKey('places.id', onupdate='CASCADE',
+                                        ondelete='CASCADE'),
+                            primary_key=True),
+                        Column('amenity_id', String(60),
+                            ForeignKey('amenities.id', onupdate='CASCADE',
+                                        ondelete='CASCADE'),
+                            primary_key=True))
 
 class Place(BaseModel, Base):
     """ Defines A place with set attributes """
@@ -23,6 +33,10 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place", cascade="all, delete")
+        amenities = relationship("Amenity", secondary="place_amenity",
+                                backref="place_amenities",
+                                viewonly=False)
+                                
 
     else:
         city_id = ""
@@ -48,3 +62,17 @@ class Place(BaseModel, Base):
             all_reviews = models.storage.all(Review)
             return [review for review in all_reviews.values()
                     if review.place_id == self.id]
+
+
+        @property
+        def amenities(self):
+            """Getter method that returns a list of review instances
+            with place_id == current place.id
+            """
+            from models import storage
+            from models.amenity import Amenity
+
+            all_amenities = models.storage.all(Amenity)
+            return [amenity for amenity in all_amenities.values()
+                    if amenity.place_id == self.id]
+
