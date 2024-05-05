@@ -27,7 +27,8 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """Distributes an archive to a web server.
+    """
+    Distributes an archive to a web server.
 
     Args:
         archive_path (str): The path of the archive to distribute.
@@ -68,7 +69,9 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """Create and distribute an archive to a web server."""
+    """
+    Creates and distributes an archive to a web server.
+    """
     file = do_pack()
     if file is None:
         return False
