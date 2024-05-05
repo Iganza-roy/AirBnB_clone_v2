@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-Fabric script that distributes an archive to your web servers
+"""Fabric script that distributes an archive to your web servers
 """
 
 from datetime import datetime
@@ -12,8 +11,7 @@ env.user = "ubuntu"
 
 
 def do_pack():
-    """    
-        returns the archive path if archive has generated correctly.
+    """returns the archive path if archive has generated correctly.
     """
 
     local("mkdir -p versions")
@@ -28,8 +26,7 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """
-        defining the Distribute archive.
+    """defining the Distribute archive.
     """
     if os.path.exists(archive_path):
         archived_file = archive_path[9:]
