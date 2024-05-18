@@ -2,7 +2,7 @@
 from flask import Flask
 """Flask web app"""
 
-app = Flask("__name__")
+app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
