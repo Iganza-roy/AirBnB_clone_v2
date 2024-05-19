@@ -10,14 +10,22 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns a dictiionary of models currently in storage"""
-        if cls is not None:
-            cls_obj = {}
-            for key, obj in FileStorage.__objects.items():
-                if isinstance(obj, cls):
-                    cls_obj[key] = obj
-            return cls_obj
+        #if cls is not None:
+            #cls_obj = {}
+            #for key, obj in FileStorage.__objects.items():
+                #if isinstance(obj, cls):
+                    #cls_obj[key] = obj
+            #return cls_obj
+        #else:
+            #return FileStorage.__objects
+        if not cls:
+            return self.__objects
+        elif type(cls) == str:
+            return {k: v for k, v in self.__objects.items()
+                    if v.__class__.__name__ == cls}
         else:
-            return FileStorage.__objects
+            return {k: v for k, v in self.__objects.items()
+                    if v.__class__ == cls}
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -62,3 +70,7 @@ class FileStorage:
             obj_id = obj.__class__.__name__ + '.' + obj.id
             if obj_id in FileStorage.__objects:
                 del FileStorage.__objects[obj_id]
+
+    def close(self):
+        """calling reload method for deserializing the JSON file"""
+        reload()
