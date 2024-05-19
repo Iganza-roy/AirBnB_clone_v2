@@ -10,7 +10,6 @@ from sqlalchemy.orm import relationship
 
 class State(BaseModel, Base):
     """ Rep of state object in MySQL db
-    
     Attrs:
         __tablename__(str): states
         name (SQLAlchemy str): name of state
