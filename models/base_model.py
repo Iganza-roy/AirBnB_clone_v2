@@ -27,7 +27,6 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
-            
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -47,10 +46,10 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
-        #cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         instance_dict = self.__dict__.copy()
         instance_dict.pop('_sa_instance_state', None)
-        return '[{:s}] ({:s}) {}'.format(self.__class__.__name__, self.id, instance_dict)
+        return '[{:s}] ({:s}) {}'.format(self.__class__.__name__,
+                                         self.id, instance_dict)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
@@ -72,7 +71,6 @@ class BaseModel:
         dictionary.pop('_sa_instance_state', None)
 
         return dictionary
-
 
     def delete(self):
         """Deletes current instance from the storage"""
