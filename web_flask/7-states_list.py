@@ -15,7 +15,7 @@ def states_temp():
 
 
 @app.teardown_appcontext
-def shutdownself():
+def shutdownself(self):
     """closes database session after each request"""
     storage.close()
 

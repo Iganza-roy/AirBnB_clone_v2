@@ -8,7 +8,7 @@ from models.state import state
 app = Flask(__name__)
 
 @app.teardown_appcontext
-def shutdownself():
+def shutdownself(self):
     """closes database session after each request"""
     storage.close()
 
